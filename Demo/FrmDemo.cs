@@ -19,7 +19,7 @@ namespace Demo
         private async void btnRandomHPicture_Click(object sender, EventArgs e)
         {
             txbItems.Clear();
-            YandeItem item = await _yandeApi.GetRandom();
+            YandeItem item = await _yandeApi.GetRandom(Rating.Safe);
             if (item == null)
             {
                 MessageBox.Show("全部结果已经迭代完毕");

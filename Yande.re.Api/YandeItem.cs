@@ -69,7 +69,7 @@ namespace Yande.re.Api
         /// 获取当前对象的大图地址
         /// </summary>
         /// <returns></returns>
-        public async Task GetBigImgUrl()
+        public async Task<string> GetBigImgUrl()
         {
             if (BigImgUrl == _not_yet_requested)
             {
@@ -92,6 +92,7 @@ namespace Yande.re.Api
                     }
                 }
             }
+            return BigImgUrl;
         }
     }
 }
