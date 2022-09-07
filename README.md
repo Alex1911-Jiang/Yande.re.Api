@@ -9,13 +9,13 @@ C# library for getting random images on [yande.re](https://yande.re/post)
 ```C#
         public static async void Main()
         {
-            YandeApi yandeApi = await YandeApi.CreateNew(); //optional parameter filter by tag  可选 Tag 参数过滤
-            YandeItem item = await yandeApi.GetRandom();
+            YandeApi yandeApi = await YandeClient.CreateNew(); //optional parameter filter by tag  可选 Tag 参数过滤
+            YandeItem item = await yandeApi.GetRandom(Rating.Safe);
+            string imgUrl = item.BigImgUrl; //Source picture url 大图(原图)URL
             // Or
             foreach (var item in yandeApi.PictureList)
             {
-                await item.GetBigImgUrl();
-                string imgUrl = item.BigImgUrl; //Source picture url 大图(原图)URL
+                string imgUrl = await item.GetBigImgUrl(); //Source picture url 大图(原图)URL
             }
         }
 ```
