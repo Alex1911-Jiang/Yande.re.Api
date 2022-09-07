@@ -4,7 +4,7 @@ namespace Demo
 {
     public partial class FrmDemo : Form
     {
-        private YandeApi _yandeApi;
+        private YandeClient _yandeApi;
         public FrmDemo()
         {
             InitializeComponent();
@@ -12,7 +12,7 @@ namespace Demo
 
         private async void btnInit_Click(object sender, EventArgs e)
         {
-            _yandeApi = await YandeApi.CreateNew(false, false, txbTagFilter.Text);
+            _yandeApi = await YandeClient.CreateNew(false, false, txbTagFilter.Text);
             txbTagFilter.Enabled = false;
             btnRandomHPicture.Enabled = btnItemList.Enabled = true;
         }

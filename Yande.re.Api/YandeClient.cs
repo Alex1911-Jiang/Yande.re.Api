@@ -10,7 +10,7 @@ namespace Yande.re.Api
     /// <summary>
     /// Yande.re 随机色图Api
     /// </summary>
-    public class YandeApi
+    public class YandeClient
     {
         private string _tag = null;
         private bool _https = true;
@@ -30,14 +30,14 @@ namespace Yande.re.Api
         /// <param name="getBigImgUrl">是否同时获取大图地址(请注意网络并发量)</param>
         /// <param name="tag">搜索的标签</param>
         /// <returns></returns>
-        public static async Task<YandeApi> CreateNew(bool https = true, bool getBigImgUrl = false, string tag = null)
+        public static async Task<YandeClient> CreateNew(bool https = true, bool getBigImgUrl = false, string tag = null)
         {
-            YandeApi yandeApi = new YandeApi(https, getBigImgUrl, tag);
+            YandeClient yandeApi = new YandeClient(https, getBigImgUrl, tag);
             await yandeApi.GetNewPictureList();
             return yandeApi;
         }
 
-        private YandeApi(bool https, bool getBigImg, string tag)
+        private YandeClient(bool https, bool getBigImg, string tag)
         {
             _https = https;
             _getBigImg = getBigImg;
@@ -85,7 +85,7 @@ namespace Yande.re.Api
                         for (int j = 0; j < alts.Length; j++)
                         {
                             if (alts[j].EndsWith(":"))
-                                key = alts[j];
+                                key = alts[j][0..^1];
                             else
                             {
                                 if (dicAlt.ContainsKey(key))
@@ -120,7 +120,7 @@ namespace Yande.re.Api
         /// <returns></returns>
         public async Task<YandeItem> GetRandom(Rating ratingFilter = Rating.Any)
         {
-            Random rdm = new Random();
+            Random rdm = new Random(Guid.NewGuid().GetHashCode());
             YandeItem yandeItem;
         IL_Reget:;
             if (_randomList.Count == 0 ||  //如果已经获取完本页所有图片, 移动到下一页

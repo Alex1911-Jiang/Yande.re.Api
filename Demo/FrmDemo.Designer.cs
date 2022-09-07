@@ -112,7 +112,7 @@
             this.btnInit.UseVisualStyleBackColor = true;
             this.btnInit.Click += new System.EventHandler(this.btnInit_Click);
             // 
-            // Form1
+            // FrmDemo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -124,8 +124,8 @@
             this.Controls.Add(this.btnRandomHPicture);
             this.Controls.Add(this.txbItems);
             this.Controls.Add(this.picRandomPicture);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "FrmDemo";
+            this.Text = "Demo";
             ((System.ComponentModel.ISupportInitialize)(this.picRandomPicture)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

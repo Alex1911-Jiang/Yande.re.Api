@@ -58,11 +58,11 @@ namespace Yande.re.Api
             Alts = alts;
             _https = https;
 
-            if (alts.ContainsKey("Tags:"))
-                Tags = alts["Tags:"].Split(' ');
+            if (alts.ContainsKey("Tags"))
+                Tags = alts["Tags"].Split(' ');
 
-            if (alts.ContainsKey("Rating:"))
-                Rating = Enum.Parse<Rating>(alts["Rating:"]);
+            if (alts.ContainsKey("Rating"))
+                Rating = Enum.Parse<Rating>(alts["Rating"]);
         }
 
         /// <summary>
