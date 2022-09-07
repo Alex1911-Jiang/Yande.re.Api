@@ -8,7 +8,7 @@
     <PackageProjectUrl>https://github.com/Alex1911-Jiang/Yande.re.Api</PackageProjectUrl>
     <AssemblyVersion></AssemblyVersion>
     <FileVersion></FileVersion>
-    <Version>1.0.3</Version>
+    <Version>1.0.4</Version>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/Alex1911-Jiang/Yande.re.Api</RepositoryUrl>
