@@ -14,7 +14,7 @@
     <RepositoryUrl>https://github.com/Alex1911-Jiang/Yande.re.Api</RepositoryUrl>
     <PackageTags>Yande;Yande.re</PackageTags>
     <NeutralLanguage>zh-CN</NeutralLanguage>
-    <PackageLicenseExpression>AGPL-3.0-or-later</PackageLicenseExpression>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Description>Yande.re 随机色图Api</Description>
   </PropertyGroup>
 
