@@ -16,6 +16,7 @@
     <NeutralLanguage>zh-CN</NeutralLanguage>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Description>Yande.re 随机色图Api</Description>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
   <ItemGroup>
