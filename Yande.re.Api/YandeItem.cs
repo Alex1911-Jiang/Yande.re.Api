@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using HtmlAgilityPack;
@@ -11,7 +12,8 @@ namespace Yande.re.Api
     /// </summary>
     public class YandeItem
     {
-        private bool _https = true;
+        private readonly bool _https;
+        private readonly string? _proxy;
         private const string _not_yet_requested = "Please invoke GetBigImgUrl first!";
 
         /// <summary>
@@ -37,7 +39,7 @@ namespace Yande.re.Api
         /// <summary>
         /// 对象的标签
         /// </summary>
-        public string[] Tags { get; }
+        public string[]? Tags { get; }
 
         /// <summary>
         /// 对象的分级
@@ -51,12 +53,14 @@ namespace Yande.re.Api
         /// <param name="showPageUrl">大图展示页面地址</param>
         /// <param name="alts">属性</param>
         /// <param name="https">是否使用https请求大图</param>
-        public YandeItem(string thuImgUrl, string showPageUrl, Dictionary<string,string> alts, bool https)
+        /// <param name="proxy">代理服务地址</param>
+        public YandeItem(string thuImgUrl, string showPageUrl, Dictionary<string,string> alts, bool https, string? proxy)
         {
             ThuImgUrl = thuImgUrl;
             ShowPageUrl = showPageUrl;
-            Alts = alts;
+            Alts = alts ?? throw new NullReferenceException();
             _https = https;
+            _proxy = proxy;
 
             if (alts.ContainsKey("Tags"))
                 Tags = alts["Tags"].Split(' ');
@@ -74,22 +78,26 @@ namespace Yande.re.Api
             if (BigImgUrl == _not_yet_requested)
             {
                 string bigImgPageUrl = $"{(_https ? "https" : "http")}://yande.re{ShowPageUrl}";
-                using (HttpClient itemClient = new HttpClient())
+                using HttpClientHandler handler = new HttpClientHandler();
+                if (!string.IsNullOrWhiteSpace(_proxy))
                 {
-                    try
-                    {
-                        var itemResponse = await itemClient.GetAsync(bigImgPageUrl);
-                        string itemHtml = await itemResponse.Content.ReadAsStringAsync();
+                    handler.UseProxy = true;
+                    handler.Proxy = new WebProxy(_proxy);
+                }
+                using HttpClient itemClient = new HttpClient(handler);
+                try
+                {
+                    var itemResponse = await itemClient.GetAsync(bigImgPageUrl);
+                    string itemHtml = await itemResponse.Content.ReadAsStringAsync();
 
-                        HtmlDocument docItem = new HtmlDocument();
-                        docItem.LoadHtml(itemHtml);
-                        string xpathItem = "/html/body/div[@id='content']/div[@id='post-view']/div[@class='content']/div/img";
-                        HtmlNode bigImgNode = docItem.DocumentNode.SelectSingleNode(xpathItem);
-                        BigImgUrl = bigImgNode.Attributes["src"].Value;
-                    }
-                    catch (Exception ex)
-                    {
-                    }
+                    HtmlDocument docItem = new HtmlDocument();
+                    docItem.LoadHtml(itemHtml);
+                    string xpathItem = "/html/body/div[@id='content']/div[@id='post-view']/div[@class='content']/div/img";
+                    HtmlNode bigImgNode = docItem.DocumentNode.SelectSingleNode(xpathItem);
+                    BigImgUrl = bigImgNode.Attributes["src"].Value;
+                }
+                catch
+                {
                 }
             }
             return BigImgUrl;

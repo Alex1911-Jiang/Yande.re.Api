@@ -69,7 +69,7 @@
             this.btnRandomHPicture.TabIndex = 2;
             this.btnRandomHPicture.Text = "随机色图";
             this.btnRandomHPicture.UseVisualStyleBackColor = true;
-            this.btnRandomHPicture.Click += new System.EventHandler(this.btnRandomHPicture_Click);
+            this.btnRandomHPicture.Click += new System.EventHandler(this.BtnRandomHPicture_Click);
             // 
             // btnItemList
             // 
@@ -81,7 +81,7 @@
             this.btnItemList.TabIndex = 3;
             this.btnItemList.Text = "地址列表";
             this.btnItemList.UseVisualStyleBackColor = true;
-            this.btnItemList.Click += new System.EventHandler(this.btnItemList_Click);
+            this.btnItemList.Click += new System.EventHandler(this.BtnItemList_Click);
             // 
             // txbTagFilter
             // 
@@ -110,7 +110,7 @@
             this.btnInit.TabIndex = 6;
             this.btnInit.Text = "初始化";
             this.btnInit.UseVisualStyleBackColor = true;
-            this.btnInit.Click += new System.EventHandler(this.btnInit_Click);
+            this.btnInit.Click += new System.EventHandler(this.BtnInit_Click);
             // 
             // FrmDemo
             // 

@@ -8,8 +8,8 @@
     <PackageProjectUrl>https://github.com/Alex1911-Jiang/Yande.re.Api</PackageProjectUrl>
     <AssemblyVersion></AssemblyVersion>
     <FileVersion></FileVersion>
-    <Version>1.0.4</Version>
-    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <Version>1.0.5</Version>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/Alex1911-Jiang/Yande.re.Api</RepositoryUrl>
     <PackageTags>Yande;Yande.re</PackageTags>
@@ -17,6 +17,7 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Description>Yande.re 随机色图Api</Description>
     <RepositoryType>git</RepositoryType>
+    <PackageReleaseNotes>添加了代理地址可选参数</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
