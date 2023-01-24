@@ -12,7 +12,7 @@ C# library for getting random images on [yande.re](https://yande.re/post) / [kon
             BaseClient client = await YandeClient.CreateNew(); //optional parameter filter by tag  可选 Tag 参数过滤
             //KonachanClient
             //LolibooruClient
-            YandeItem item = await client.GetRandom(Rating.Safe);
+            PictureItem item = await client.GetRandom(Rating.Safe);
             string imgUrl = item.BigImgUrl; //Source picture url 大图(原图)URL
             // Or
             foreach (var item in client.PictureList)
