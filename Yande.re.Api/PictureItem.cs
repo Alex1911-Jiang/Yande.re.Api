@@ -13,15 +13,18 @@ namespace Yande.re.Api
     public class PictureItem
     {
         private readonly bool _https;
-        private string? _host;
         private readonly string? _proxy;
         private const string _not_yet_requested = "Please invoke GetBigImgUrl first!";
+
+        /// <summary>
+        /// 站点的主机名
+        /// </summary>
+        public string? Host { get; }
 
         /// <summary>
         /// 大图(原图)地址
         /// </summary>
         public string BigImgUrl { get; private set; } = _not_yet_requested;
-
 
         /// <summary>
         /// 缩略图地址
@@ -63,7 +66,7 @@ namespace Yande.re.Api
             ShowPageUrl = showPageUrl;
             Alts = alts ?? throw new NullReferenceException();
             _https = https;
-            _host = host;
+            Host = host;
             _proxy = proxy;
 
             if (alts.ContainsKey("Tags"))
@@ -81,7 +84,7 @@ namespace Yande.re.Api
         {
             if (BigImgUrl == _not_yet_requested)
             {
-                string bigImgPageUrl = $"{(_https ? "https" : "http")}://{_host}{ShowPageUrl}";
+                string bigImgPageUrl = $"{(_https ? "https" : "http")}://{Host}{ShowPageUrl}";
                 using HttpClientHandler handler = new HttpClientHandler();
                 if (!string.IsNullOrWhiteSpace(_proxy))
                 {

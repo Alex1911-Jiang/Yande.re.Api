@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Sockets;
 using System.Threading.Tasks;
 using HtmlAgilityPack;
 
@@ -65,6 +66,8 @@ namespace Yande.re.Api
             using HttpClient client = new HttpClient(handler);
             string url = $@"{(_https ? "https" : "http")}://{Host}/post?page={_pageIndex}{tagUrl}";
             HttpResponseMessage response = await client.GetAsync(url);
+            if ((int)response.StatusCode >= 400)
+                throw new HttpRequestException($"{(int)response.StatusCode} {response.StatusCode}");
             string html = await response.Content.ReadAsStringAsync();
 
             HtmlDocument doc = new HtmlDocument();
