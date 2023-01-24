@@ -6,10 +6,11 @@ namespace Demo
 {
     public partial class FrmDemo : Form
     {
-        private YandeClient? _yandeApi;
+        private BaseClient? _yandeApi;
         public FrmDemo()
         {
             InitializeComponent();
+            cboHost.SelectedIndex= 0;
         }
 
         private async void BtnInit_Click(object sender, EventArgs e)
@@ -21,7 +22,13 @@ namespace Demo
         {
             try
             {
-                _yandeApi = await YandeClient.CreateNew(false, false, txbTagFilter.Text);
+                _yandeApi = cboHost.SelectedIndex switch
+                {
+                    0 => await YandeClient.CreateNew(false, false, txbTagFilter.Text),
+                    1 => await KonachanClient.CreateNew(false, false, txbTagFilter.Text),
+                    2 => await Lolibooru.CreateNew(false, false, txbTagFilter.Text),
+                    _ => throw new NotImplementedException(),
+                };
                 txbTagFilter.Enabled = false;
                 btnRandomHPicture.Enabled = btnItemList.Enabled = true;
                 txbItems.AppendText("初始化成功");
@@ -38,7 +45,7 @@ namespace Demo
                 await Init();
 
             txbItems.Clear();
-            YandeItem? item = await _yandeApi!.GetRandom(Rating.Safe);
+            PictureItem? item = await _yandeApi!.GetRandom(Rating.Safe);
             if (item is null)
             {
                 MessageBox.Show("全部结果已经迭代完毕");

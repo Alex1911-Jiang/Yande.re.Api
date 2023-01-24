@@ -3,14 +3,14 @@
 namespace Yande.re.Api
 {
     /// <summary>
-    /// Yande.re 随机色图Api
+    /// Konachan 随机色图Api
     /// </summary>
-    public class YandeClient : BaseClient
+    public class KonachanClient : BaseClient
     {
         /// <summary>
         /// 请求地址
         /// </summary>
-        internal override string Host => "yande.re";
+        internal override string Host => "konachan.net";
 
         /// <summary>
         /// 构造一个Yande请求实例, 构造函数中已获取图片列表页面数据
@@ -20,14 +20,14 @@ namespace Yande.re.Api
         /// <param name="tag">搜索的标签（为null或空字符串时不进行搜索）</param>
         /// <param name="proxy">代理地址（为null或空字符串时不使用代理）</param>
         /// <returns></returns>
-        public static async Task<YandeClient> CreateNew(bool https = true, bool getBigImgUrl = false, string? tag = null, string? proxy = null)
+        public static async Task<KonachanClient> CreateNew(bool https = true, bool getBigImgUrl = false, string? tag = null, string? proxy = null)
         {
-            YandeClient yandeApi = new YandeClient(https, getBigImgUrl, tag, proxy);
-            await yandeApi.GetNewPictureList();
-            return yandeApi;
+            KonachanClient konachanClient = new KonachanClient(https, getBigImgUrl, tag, proxy);
+            await konachanClient.GetNewPictureList();
+            return konachanClient;
         }
 
-        private YandeClient(bool https, bool getBigImg, string? tag, string? proxy) : base(https, getBigImg, tag, proxy)
+        private KonachanClient(bool https, bool getBigImg, string? tag, string? proxy) : base(https, getBigImg, tag, proxy)
         {
         }
     }

@@ -8,11 +8,12 @@ using HtmlAgilityPack;
 namespace Yande.re.Api
 {
     /// <summary>
-    /// 一个Yande图片对象
+    /// 一个图片对象
     /// </summary>
-    public class YandeItem
+    public class PictureItem
     {
         private readonly bool _https;
+        private string? _host;
         private readonly string? _proxy;
         private const string _not_yet_requested = "Please invoke GetBigImgUrl first!";
 
@@ -20,6 +21,7 @@ namespace Yande.re.Api
         /// 大图(原图)地址
         /// </summary>
         public string BigImgUrl { get; private set; } = _not_yet_requested;
+
 
         /// <summary>
         /// 缩略图地址
@@ -47,19 +49,21 @@ namespace Yande.re.Api
         public Rating Rating { get; }
 
         /// <summary>
-        /// Yande图片对象
+        /// 图片对象
         /// </summary>
         /// <param name="thuImgUrl">缩略图地址</param>
         /// <param name="showPageUrl">大图展示页面地址</param>
         /// <param name="alts">属性</param>
         /// <param name="https">是否使用https请求大图</param>
+        /// <param name="host">站点域名</param>
         /// <param name="proxy">代理服务地址</param>
-        public YandeItem(string thuImgUrl, string showPageUrl, Dictionary<string,string> alts, bool https, string? proxy)
+        public PictureItem(string thuImgUrl, string showPageUrl, Dictionary<string,string> alts, bool https, string? host, string? proxy)
         {
             ThuImgUrl = thuImgUrl;
             ShowPageUrl = showPageUrl;
             Alts = alts ?? throw new NullReferenceException();
             _https = https;
+            _host = host;
             _proxy = proxy;
 
             if (alts.ContainsKey("Tags"))
@@ -77,7 +81,7 @@ namespace Yande.re.Api
         {
             if (BigImgUrl == _not_yet_requested)
             {
-                string bigImgPageUrl = $"{(_https ? "https" : "http")}://yande.re{ShowPageUrl}";
+                string bigImgPageUrl = $"{(_https ? "https" : "http")}://{_host}{ShowPageUrl}";
                 using HttpClientHandler handler = new HttpClientHandler();
                 if (!string.IsNullOrWhiteSpace(_proxy))
                 {

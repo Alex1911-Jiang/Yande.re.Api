@@ -8,16 +8,16 @@
     <PackageProjectUrl>https://github.com/Alex1911-Jiang/Yande.re.Api</PackageProjectUrl>
     <AssemblyVersion></AssemblyVersion>
     <FileVersion></FileVersion>
-    <Version>1.0.5</Version>
+    <Version>1.0.6</Version>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/Alex1911-Jiang/Yande.re.Api</RepositoryUrl>
-    <PackageTags>Yande;Yande.re</PackageTags>
+    <PackageTags>Yande;Yande.re;Konachan;Konachan.net;Lolibooru;Lolibooru.moe</PackageTags>
     <NeutralLanguage>zh-CN</NeutralLanguage>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Description>Yande.re 随机色图Api</Description>
+    <Description>Yande.re/Konachan.net/Lolibooru.moe 随机色图Api</Description>
     <RepositoryType>git</RepositoryType>
-    <PackageReleaseNotes>添加了代理地址可选参数</PackageReleaseNotes>
+    <PackageReleaseNotes>添加对 Konachan 和 Lolibooru 网站的支持</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
