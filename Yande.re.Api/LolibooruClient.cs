@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,6 +8,7 @@ namespace Yande.re.Api
     /// <summary>
     /// Lolibooru 随机色图Api
     /// </summary>
+    [Obsolete]
     public class Lolibooru : BaseClient
     {
         /// <summary>
@@ -26,11 +28,11 @@ namespace Yande.re.Api
         /// <param name="getBigImgUrl">是否同时获取大图地址(请注意网络并发量)</param>
         /// <param name="tag">搜索的标签（为null或空字符串时不进行搜索）</param>
         /// <param name="proxy">代理地址（为null或空字符串时不使用代理）</param>
-        /// <returns></returns>
+        [Obsolete]
         public static async Task<Lolibooru> CreateNew(bool https = true, bool getBigImgUrl = false, string? tag = null, string? proxy = null)
         {
             Lolibooru lolibooruClient = new Lolibooru(https, getBigImgUrl, tag, proxy);
-            await lolibooruClient.GetNewPictureList();
+            await lolibooruClient.GetNextPagePictureList();
             return lolibooruClient;
         }
 

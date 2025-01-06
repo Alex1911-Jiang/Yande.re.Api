@@ -23,7 +23,7 @@ namespace Yande.re.Api
         public static async Task<KonachanClient> CreateNew(bool https = true, bool getBigImgUrl = false, string? tag = null, string? proxy = null)
         {
             KonachanClient konachanClient = new KonachanClient(https, getBigImgUrl, tag, proxy);
-            await konachanClient.GetNewPictureList();
+            await konachanClient.GetNextPagePictureList();
             return konachanClient;
         }
 

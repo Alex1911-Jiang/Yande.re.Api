@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Net.Sockets;
 using System.Threading.Tasks;
 using HtmlAgilityPack;
 
@@ -48,7 +47,7 @@ namespace Yande.re.Api
         /// 获取下一页图片列表
         /// </summary>
         /// <returns></returns>
-        internal async Task GetNewPictureList()
+        public async Task<int> GetNextPagePictureList()
         {
             _pageIndex++;
             PictureList.Clear();
@@ -75,7 +74,7 @@ namespace Yande.re.Api
             HtmlNodeCollection _imageNodes = doc.DocumentNode.SelectNodes(XPath);
 
             if (_imageNodes == null)
-                return;
+                return _pageIndex;
 
             for (int i = 0; i < _imageNodes.Count; i++)
             {
@@ -113,6 +112,7 @@ namespace Yande.re.Api
                     Task.WaitAll(getBigImgTasks.ToArray());
                 });
             }
+            return _pageIndex;
         }
 
         /// <summary>
@@ -151,7 +151,7 @@ namespace Yande.re.Api
             if (_randomList.Count == 0 ||  //如果已经获取完本页所有图片, 移动到下一页
                (ratingFilter != Rating.Any && _randomList.Where(p => p.Rating == ratingFilter).Count() == 0))  //如果本页剩下的图片已经不包含过滤的评分, 移动到下一页
             {
-                await GetNewPictureList();
+                await GetNextPagePictureList();
                 if (PictureList.Count == 0)  //如果已经超过最后一页
                     return null;
             }

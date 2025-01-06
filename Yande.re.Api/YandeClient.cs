@@ -23,7 +23,7 @@ namespace Yande.re.Api
         public static async Task<YandeClient> CreateNew(bool https = true, bool getBigImgUrl = false, string? tag = null, string? proxy = null)
         {
             YandeClient yandeApi = new YandeClient(https, getBigImgUrl, tag, proxy);
-            await yandeApi.GetNewPictureList();
+            await yandeApi.GetNextPagePictureList();
             return yandeApi;
         }
 
